@@ -1,7 +1,8 @@
-
-"use client"
+"use client";
 
 import Link from "next/link";
+import SignInButton from "./navbarComponents/SignInButton";
+import UserDropdown from "./navbarComponents/DropDownMenu";
 
 const Navbar: React.FC = () => {
   return (
@@ -19,21 +20,14 @@ const Navbar: React.FC = () => {
 
           <Link
             className="text-white hover:underline hover:text-blue-600"
-            href="/create-post"
-          >
-            Create Post
-          </Link>
-
-          <Link
-            className="text-white hover:underline hover:text-blue-600"
             href="/contact"
           >
             Contact
           </Link>
-
-          <button className="bg-white text-blue-500 px-4 py-2 rounded-full">
-            Sign In
-          </button>
+          <Link href="">
+            
+            <UserDropdown />
+          </Link>
         </div>
       </div>
     </nav>
