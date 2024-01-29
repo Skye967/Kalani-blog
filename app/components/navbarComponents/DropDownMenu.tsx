@@ -6,8 +6,8 @@ import Link from "next/link";
 import { useUser } from "@/app/context/user";
 
 const UserDropdown: React.FC = () => {
-    const [user, setUser] = useState<{ name: string, email: string} | null>(null)
-//   const { user, signOut } = useUser();
+    //const [user, setUser] = useState<{ name: string, email: string} | null>(null)
+   const { user, signOut } = useUser();
   const [isOpen, setIsOpen] = useState(false);
 
   const handleToggleMenu = () => {
@@ -32,7 +32,7 @@ const UserDropdown: React.FC = () => {
         onClick={handleToggleMenu}
       >
         <span className="text-white hover:underline hover:text-blue-600">
-          {user ? "Hello, " + user.name : <Link href="/auth">Administrator</Link>}
+          {user ? "Hello, " + user.email : <Link href="/auth">Administrator</Link>}
         </span>
         <svg
           className="w-5 h-5 ml-2 -mr-1"

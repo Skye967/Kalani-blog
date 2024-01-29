@@ -59,25 +59,31 @@ export const UserContextProvider: React.FC<UserContextProviderProps> = ({
   const getCurrentUser = async () => {
     const response = await supabase.auth.getUser();
     if (response.data.user) {
-      setUser(response.data.user);
+        setUser(response.data.user);
     }
   };
 
   const getSession = async () => {
     const session = await supabase.auth.getSession();
     if (session.data.session) {
-      setSession(session.data.session);
+        setSession(session.data.session);
+        return session.data.session
     }
+      setUser(null);
+      setSession(null)
+      return null
   };
 
   useEffect(() => {
     const isUser = async () => {
-      await getSession();
+      const session = await getSession();
       if (session) {
         await getCurrentUser();
       }
     };
+      isUser();
   }, []);
+    
 
   const contextValue: UserContextProps = {
     user,
