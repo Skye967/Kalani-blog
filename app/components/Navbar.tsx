@@ -1,10 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import SignInButton from "./navbarComponents/SignInButton";
 import UserDropdown from "./navbarComponents/DropDownMenu";
 
-const Navbar: React.FC = () => {
+const Navbar: React.FC = (props) => {
   return (
     <nav className="bg-blue-500 p-4">
       <div className="container mx-auto flex justify-between items-center">
@@ -24,10 +23,7 @@ const Navbar: React.FC = () => {
           >
             Contact
           </Link>
-          <Link href="">
-            
             <UserDropdown />
-          </Link>
         </div>
       </div>
     </nav>
@@ -35,3 +31,5 @@ const Navbar: React.FC = () => {
 };
 
 export default Navbar;
+
+

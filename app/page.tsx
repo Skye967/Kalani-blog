@@ -6,6 +6,7 @@ import Profile from './components/Profile';
 import { useState, useEffect } from 'react';
 import Loading from './components/Loading';
 import { ToastContainer } from "react-toastify";
+import MainLayout from "./layouts/MainLayout";
 
 export default function Home() {
 
@@ -19,21 +20,20 @@ export default function Home() {
   });
 
   return (
-    <main className="">
-      <Navbar />
-      <ToastContainer />
-      {isLoading ? <Loading /> : <div></div>}
-      <div className="flex items-center justify-center">
-        <div>
-          <Profile
-            pictureUrl="/images/profile.jpg"
-            biography="Passionate developer exploring the world of technology."
-          />
+    <MainLayout>
+      <main className="">
+        <div className="flex items-center justify-center">
+          <div>
+            <Profile
+              pictureUrl="/images/profile.jpg"
+              biography="Passionate developer exploring the world of technology."
+            />
+          </div>
+          <div>
+            <Posts />
+          </div>
         </div>
-        <div>
-          <Posts />
-        </div>
-      </div>
-    </main>
+      </main>
+    </MainLayout>
   );
 }

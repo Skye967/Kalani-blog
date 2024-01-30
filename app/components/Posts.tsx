@@ -1,11 +1,9 @@
-
-"use client"
+"use client";
 
 import { useState, useEffect } from "react";
-import Loading from "./Loading";
 import useIsLoading from "../hooks/useIsLoading";
-
-
+import Link from "next/link";
+import { useUser } from "../context/user";
 
 type Post = {
   id: number;
@@ -16,22 +14,22 @@ type Post = {
 };
 
 const Posts: React.FC = () => {
-    const [posts, setPosts] = useState<Post[]>([]);
+  const [posts, setPosts] = useState<Post[]>([]);
+  const { user } = useUser();
 
-    useEffect(() => {
-      
-        const fetchPosts = async () => {
-        useIsLoading(true)
+  useEffect(() => {
+    const fetchPosts = async () => {
+      useIsLoading(true);
       try {
         const response = await fetch("/api/posts");
         const data = await response.json();
-          setPosts(data);
-          useIsLoading(false)
+        setPosts(data);
+        useIsLoading(false);
       } catch (error) {
         console.error("Error fetching posts:", error);
-        useIsLoading(false)
+        useIsLoading(false);
       }
-      useIsLoading(false)
+      useIsLoading(false);
     };
 
     fetchPosts();
@@ -39,18 +37,25 @@ const Posts: React.FC = () => {
 
   return (
     <div className="container mx-auto mt-8">
-              <div>
-          {posts.map((post) => (
-            <div key={post.id} className="border p-4 mb-4">
-              <h2 className="text-xl font-bold">{post.title}</h2>
-              <p className="mt-2">{post.content}</p>
-            </div>
-          ))}
-        </div>
+      <div>
+        {posts.map((post) => (
+          <div key={post.id} className="border p-4 mb-4">
+            <h2 className="text-xl font-bold">{post.title}</h2>
+            <p className="mt-2">{post.content}</p>
+            {user ? (
+              <Link
+                className="bg-blue-500 text-white py-1 px-4 rounded focus:outline-none focus:ring focus:border-blue-300"
+                key={post.id}
+                href={`/post/${post.id}`}
+              >
+                Edit
+              </Link>
+            ) : null}
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
-
-
 
 export default Posts;
