@@ -1,7 +1,7 @@
 "use client";
 
 import Navbar from "@/app/components/Navbar";
-import useIsLoading from "@/app/hooks/useIsLoading";
+import UseIsLoading from "@/app/hooks/useIsLoading";
 import MainLayout from "@/app/layouts/MainLayout";
 import { useParams, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
@@ -22,23 +22,23 @@ const PostDisplay: React.FC = (props) => {
   const [content, setContent] = useState("");
 
   useEffect(() => {
-    useIsLoading(true);
+    UseIsLoading(true);
     async function getPostData() {
-      useIsLoading(true);
+      UseIsLoading(true);
       try {
         const response = await fetch(`/api/post/${params.id}`);
         const data = await response.json();
         setPost(data);
-        useIsLoading(false);
+        UseIsLoading(false);
       } catch (error) {
         console.error("Error fetching post data: ", error);
-        useIsLoading(false);
+        UseIsLoading(false);
       }
-      useIsLoading(false);
+      UseIsLoading(false);
     }
     getPostData();
-    useIsLoading(false)
-  }, [post]);
+    UseIsLoading(false)
+  }, [post, params]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -62,7 +62,7 @@ const PostDisplay: React.FC = (props) => {
   };
 
     async function handleDelete() {
-        useIsLoading(true)
+        UseIsLoading(true)
         const response = await fetch(`/api/delete-post/${post?.id}`, {
           method: "DELETE",
           headers: { "Content-Type": "application/json" },
@@ -70,14 +70,14 @@ const PostDisplay: React.FC = (props) => {
 
     if (!response.ok) {
         console.error("Error deleting post:", response.statusText);
-        useIsLoading(false)
+        UseIsLoading(false)
     } else {
       const deletedPost = await response.json();
         console.log("Deleted post:", deletedPost);
-        useIsLoading(false)
+        UseIsLoading(false)
         router.push('/')
     }
-        useIsLoading(false);
+        UseIsLoading(false);
   }
 
   return (

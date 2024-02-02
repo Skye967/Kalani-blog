@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import useIsLoading from "../hooks/useIsLoading";
+import UseIsLoading from "../hooks/useIsLoading";
 import Link from "next/link";
 import { useUser } from "../context/user";
 
@@ -19,17 +19,17 @@ const Posts: React.FC = () => {
 
   useEffect(() => {
     const fetchPosts = async () => {
-      useIsLoading(true);
+      UseIsLoading(true);
       try {
         const response = await fetch("/api/posts");
         const data = await response.json();
         setPosts(data);
-        useIsLoading(false);
+        UseIsLoading(false);
       } catch (error) {
         console.error("Error fetching posts:", error);
-        useIsLoading(false);
+        UseIsLoading(false);
       }
-      useIsLoading(false);
+      UseIsLoading(false);
     };
 
     fetchPosts();

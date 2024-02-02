@@ -3,14 +3,14 @@
 import React, { useState } from "react";
 import PostForm from "../components/PostForm";
 import { useRouter } from "next/navigation";
-import useIsLoading from "../hooks/useIsLoading";
+import UseIsLoading from "../hooks/useIsLoading";
 import MainLayout from "../layouts/MainLayout";
 
 const Home: React.FC = () => {
     const router = useRouter()
 
     const handleCreatePost = async (title: string, content: string) => {
-      useIsLoading(true)
+      UseIsLoading(true)
     try {
       const response = await fetch("/api/create-post", {
         method: "POST",
@@ -22,17 +22,17 @@ const Home: React.FC = () => {
 
       if (response) {
           const createdPost = await response.json();
-          useIsLoading(false)
+          UseIsLoading(false)
           router.push('/')
       } else {
           console.error("Error creating post:", response);
-          useIsLoading(false);
+          UseIsLoading(false);
       }
     } catch (error) {
         console.error("Error creating post:", error);
-        useIsLoading(false);
+        UseIsLoading(false);
     }
-        useIsLoading(false);
+        UseIsLoading(false);
   };
 
     return (

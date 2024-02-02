@@ -83,7 +83,7 @@ export const UserContextProvider: React.FC<UserContextProviderProps> = ({
       }
     };
       isUser();
-  }, []);
+  });
     
 
   const contextValue: UserContextProps = {
